@@ -9,18 +9,12 @@ COPY requirements.txt /app/
 
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Create directories for static and media files
-RUN mkdir -p /app/staticfiles /app/media
-
+ 
 # Copy the entire Django project into the container
 COPY . /app/
-
-# Run collectstatic and migrate
-RUN python manage.py collectstatic --no-input && python manage.py migrate
 
 # Expose the port the app runs on
 EXPOSE 8010
 
 # Start the Django server
-CMD ["gunicorn", "--config", "conf/gunicorn.conf.py", "ecom.wsgi", "--preload"]
+CMD python manage.py migrate && gunicorn --config conf/gunicorn.conf.py ecom.wsgi --preload
