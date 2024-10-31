@@ -13,11 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire Django project into the container
 COPY . /app/
 
-# Create the media and static files directories
-# RUN mkdir -p /app/ecom/media /app/staticfilesx
 
 # Collect static files
-# RUN python manage.py collectstatic --no-input
+RUN python manage.py collectstatic --no-input
 
 # Expose the port the app runs on
 EXPOSE 8010
