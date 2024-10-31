@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-h-@1s!cxkmfri@u-+k(k0es@u65-h$d1u0g$gbv15ukro37gy*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'core.User'
 
@@ -94,13 +94,23 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'ecommerce',  
+#         'USER': 'postgres',  
+#         'PASSWORD': '1016',  
+#         'HOST': '127.0.0.1',  
+#         'PORT': '5432',  
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecommerce',  
-        'USER': 'postgres',  
-        'PASSWORD': '1016',  
-        'HOST': '127.0.0.1',  
+        'NAME': 'postgres_practice_navo',  
+        'USER': 'postgres_practice_navo_user',  
+        'PASSWORD': 'ATkZjtCto9BOha9SkvIphymtwn5QV4z1',  
+        'HOST': 'dpg-cshqcqm8ii6s73bk2f5g-a.singapore-postgres.render.com',  
         'PORT': '5432',  
     }
 }
