@@ -9,9 +9,7 @@ COPY requirements.txt /app/
 
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-
-RUN python manage.py collectstatic --no-input
-
+ 
 # Copy the entire Django project into the container
 COPY . /app/
 
@@ -19,4 +17,4 @@ COPY . /app/
 EXPOSE 8010
 
 # Start the Django server
-CMD python manage.py migrate && gunicorn --config conf/gunicorn.conf.py ecom.wsgi --preload
+CMD python manage.py collectstatic --no-input &&  python manage.py migrate && gunicorn --config conf/gunicorn.conf.py ecom.wsgi --preload
