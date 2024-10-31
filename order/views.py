@@ -5,9 +5,29 @@ from .serializers import  OrderSerializer
 from rest_framework.permissions import IsAuthenticated
 from .models import Order
 from .utils import get_user_from_token  
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 class OrderCreateView(APIView):
     permission_classes = [IsAuthenticated] 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'total_amount': openapi.Schema(type=openapi.TYPE_NUMBER, format=openapi.FORMAT_DECIMAL, description="Total amount of the order"),
+                'items': openapi.Schema(type=openapi.TYPE_ARRAY, items=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'product': openapi.Schema(type=openapi.TYPE_INTEGER, description="Product ID"),
+                    'quantity': openapi.Schema(type=openapi.TYPE_INTEGER, description="Quantity of the product"),
+                }), description="List of order items")
+            },
+            required=['total_amount', 'items'],
+        ),
+        responses={
+            201: openapi.Response('Order created successfully', OrderSerializer),
+            400: 'Bad Request',
+            401: 'Unauthorized',
+        }
+    )
     def post(self, request, *args, **kwargs):
         token = request.META.get('HTTP_AUTHORIZATION', '').split(' ')[1]  
         user_info = get_user_from_token(token)      
@@ -32,7 +52,14 @@ class OrderCreateView(APIView):
 
 
 class OrderHistoryView(APIView):
-    permission_classes = [IsAuthenticated]  
+    permission_classes = [IsAuthenticated]
+
+    @swagger_auto_schema(
+        responses={
+            200: openapi.Response('Order history retrieved successfully', OrderSerializer(many=True)),
+            401: 'Unauthorized',
+        }
+    )  
     def get(self, request, *args, **kwargs):
         orders = Order.objects.filter(user=request.user)
         serializer = OrderSerializer(orders, many=True)
