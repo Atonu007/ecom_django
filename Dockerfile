@@ -7,6 +7,8 @@ WORKDIR /app
 # Copy the requirements file into the container
 COPY requirements.txt /app/
 
+RUN mkdir -p /app/staticfiles /app/media
+
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
  
@@ -17,4 +19,4 @@ COPY . /app/
 EXPOSE 8010
 
 # Start the Django server
-CMD python manage.py migrate && gunicorn --config conf/gunicorn.conf.py ecom.wsgi --preload
+CMD python manage.py collectstatic --no-input && python manage.py migrate && gunicorn --config conf/gunicorn.conf.py ecom.wsgi --preload
