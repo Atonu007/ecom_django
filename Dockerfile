@@ -17,4 +17,4 @@ COPY . /app/
 EXPOSE 8010
 
 # Start the Django server
-CMD  python manage.py migrate && gunicorn --config conf/gunicorn.conf.py ecom.wsgi --preload
+CMD python manage.py collectstatic --no-input &&  python manage.py migrate && gunicorn --config conf/gunicorn.conf.py ecom.wsgi --preload
