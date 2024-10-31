@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class CategoryCreateView(APIView):
-    permission_classes = [IsAuthenticated] 
+    # permission_classes = [IsAuthenticated] 
     
     @swagger_auto_schema(
         request_body=CategorySerializer,
@@ -38,7 +38,7 @@ class CategoryListView(APIView):
     
 
 class CategoryDetailUpdateView(APIView):
-    permission_classes = [IsAuthenticated] 
+    # permission_classes = [IsAuthenticated] 
     @swagger_auto_schema(
         responses={200: CategorySerializer, 404: 'Category not found'}
     )
@@ -81,7 +81,7 @@ class CategoryDetailUpdateView(APIView):
 
 
 class SubCategoryCreateView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     @swagger_auto_schema(
         request_body=SubCategorySerializer,
         responses={201: openapi.Response('Subcategory created successfully'), 400: 'Bad Request'}
@@ -108,7 +108,7 @@ class SubCategoryListView(APIView):
 
 
 class SubCategoryDetailUpdateView(APIView):
-    permission_classes = [IsAuthenticated] 
+    # permission_classes = [IsAuthenticated] 
 
     @swagger_auto_schema(
         responses={200: SubCategorySerializer, 404: 'Subcategory not found'}
@@ -154,7 +154,7 @@ class SubCategoryDetailUpdateView(APIView):
 
 
 class ProductCreateView(APIView):
-    permission_classes = [IsAuthenticated] 
+    # permission_classes = [IsAuthenticated] 
 
     @swagger_auto_schema(
         request_body=ProductSerializer,
@@ -183,7 +183,7 @@ class ProductListView(APIView):
 
 
 class ProductDetailUpdateView(APIView):
-    permission_classes = [IsAuthenticated] 
+    # permission_classes = [IsAuthenticated] 
 
     @swagger_auto_schema(
         responses={200: ProductSerializer, 404: 'Product not found'}

@@ -46,7 +46,7 @@ class LoginView(APIView):
     
 
 class LogoutView(APIView):
-    permission_classes = [IsAuthenticated]  
+    # permission_classes = [IsAuthenticated]  
     @swagger_auto_schema(
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,

@@ -9,7 +9,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 class OrderCreateView(APIView):
-    permission_classes = [IsAuthenticated] 
+    # permission_classes = [IsAuthenticated] 
     @swagger_auto_schema(
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
@@ -52,7 +52,7 @@ class OrderCreateView(APIView):
 
 
 class OrderHistoryView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
         responses={
